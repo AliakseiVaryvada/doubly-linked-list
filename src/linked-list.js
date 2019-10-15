@@ -9,20 +9,15 @@ class LinkedList {
 
     append(data) {
         const newNode = new Node(data);
-        console.log("im here1");
         if (this.length == 0) {
             this.head = newNode;
             this.tail = newNode;
-            console.log("im here2");
         } else {
-            console.log("im here3");
             this.tail.next = newNode; // хвостовому элементу в значение next кладём newNode
             newNode.prev = this.tail; // текущее значение хвоста даём новому элементу
-
             this.tail = newNode; // делаем новый хвост
         }
         this.length++;
-        console.log(length);
     }
 
     head() {
