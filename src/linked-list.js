@@ -25,6 +25,7 @@ class LinkedList {
     }
 
     tail() {
+        console.log(this.tail.data);
         return this.tail.data;
     }
 
