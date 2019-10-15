@@ -53,7 +53,7 @@ class LinkedList {
             let current = this.head;
             let prev = null;
             let count = 0;
-            while (count < position) {
+            while (count < index) {
                 prev = current; // считаем предыдущий элемент
                 current = current.next; // считаем нашу позицию
                 count++;
