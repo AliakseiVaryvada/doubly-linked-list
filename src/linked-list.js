@@ -8,14 +8,14 @@ class LinkedList {
     }
 
     append(data) {
-        const newNode = new Node(data);
+        let node = new Node(data);
         if (this.length == 0) {
-            this.head = newNode;
-            this.tail = newNode;
+            this.head = node;
+            this.tail = node;
         } else {
-            this.tail.next = newNode; // хвостовому элементу в значение next кладём newNode
-            newNode.prev = this.tail; // текущее значение хвоста даём новому элементу
-            this.tail = newNode; // делаем новый хвост
+            this.tail.next = node; // хвостовому элементу в значение next кладём newNode
+            node.prev = this.tail; // текущее значение хвоста даём новому элементу
+            this.tail = node; // делаем новый хвост
         }
         this.length++;
     }
