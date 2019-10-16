@@ -18,6 +18,7 @@ class LinkedList {
             this.tail = node; // делаем новый хвост
         }
         this.length++;
+        return this;
     }
 
     head() {
@@ -65,6 +66,7 @@ class LinkedList {
             current.prev = node; // значение прев впереди идущего нода элемента
         }
         this.length++;
+        return this;
     }
 
     isEmpty() {
@@ -76,11 +78,10 @@ class LinkedList {
     }
 
     clear() {
-        while (length > 0) {
-            this.head = this.head.next; //в конструтор этого класса (в хэд) кладём следующий объект
-            this.head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
-            length--;
-        }
+        this.length = 0;
+        this._head = new Node();
+        this._tail = new Node();
+        return this;
     }
 
     deleteAt(index) {
@@ -109,6 +110,7 @@ class LinkedList {
             current.next.prev = prev;
         }
         length--;
+        return this;
     }
 
     reverse() {}
