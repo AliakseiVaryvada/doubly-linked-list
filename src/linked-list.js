@@ -2,8 +2,8 @@ const Node = require("./node");
 
 class LinkedList {
     constructor() {
-        this.head = null;
-        this.tail = null;
+        this._head = null;
+        this._tail = null;
         this.length = 0;
     }
 
@@ -21,12 +21,11 @@ class LinkedList {
     }
 
     head() {
-        return this.head.data;
+        return this._head.data;
     }
 
     tail() {
-        console.log(this.tail.data);
-        return this.tail.data;
+        return this._tail.data;
     }
 
     at(index) {
