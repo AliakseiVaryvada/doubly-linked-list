@@ -92,13 +92,10 @@ class LinkedList {
         }
         if (count == 0) {
             this._head = this._head.next; //в конструтор этого класса (в хэд) кладём следующий объект
-            this._head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
         }
         if (count == this.length - 1) {
             this._tail = this._tail.prev;
-            this._tail.next = null;
         }
-
         this.length--;
         return this;
     }
