@@ -22,10 +22,16 @@ class LinkedList {
     }
 
     head() {
+        if (this.head === null) {
+            return null;
+        }
         return this.head.data;
     }
 
     tail() {
+        if (this.tail === null) {
+            return null;
+        }
         return this.tail.data;
     }
 
