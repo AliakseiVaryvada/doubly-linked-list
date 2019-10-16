@@ -80,27 +80,23 @@ class LinkedList {
     }
 
     deleteAt(index) {
-        if (index < 0 || index >= this.length) {
-            return null;
-        }
-        let current;
-        if (index == 0) {
-            this._head = this._head.next; //в конструтор этого класса (в хэд) кладём следующий объект
-            this._head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
-        } else if (index == this.length - 1) {
-            this._tail = this._tail.prev;
-            this._tail.next = null;
-        } else {
-            current = this._head;
-            let prev = null;
-            let count = 0;
-            while (count < index) {
-                prev = current;
+        let current = this._head;
+        let count = index;
+        if (count > 0 && count < this.length - 1) {
+            while (count <= index) {
                 current = current.next;
                 count++;
             }
             current.prev.next = current.next;
-            current.next.prev = prev;
+            current.next.prev = current.prev;
+        }
+        if (count == 0) {
+            this._head = this._head.next; //в конструтор этого класса (в хэд) кладём следующий объект
+            this._head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
+        }
+        if (count == this.length - 1) {
+            this._tail = this._tail.prev;
+            this._tail.next = null;
         }
 
         this.length--;
