@@ -39,7 +39,7 @@ class LinkedList {
         if (index < 0 || index >= this.length) {
             return null;
         } else {
-            let current = this.head;
+            let current = this._head;
             let count = 0;
             while (count < index) {
                 current = current.next;
@@ -50,27 +50,16 @@ class LinkedList {
     }
 
     insertAt(index, data) {
-        let node = new Node(data);
-        if ((index = 0)) {
-            this._tail.next = node; // хвостовому элементу в значение next кладём newNode
-            node.prev = this._tail; // текущее значение хвоста даём новому элементу
-
-            this._tail = node; // делаем новый хвост
-        } else {
-            let current = this._head;
-            let prev = null;
-            let count = 0;
-            while (count < index) {
-                prev = current; // считаем предыдущий элемент
-                current = current.next; // считаем нашу позицию
-                count++;
-            }
-            prev.next = node; // предыдущее значение следующего элемента
-            node.prev = prev; // предыдущее значение нода = прев
-
-            node.next = current; // даём значению некст объекта нод  значение куррент( посчитанное)
-            current.prev = node; // значение прев впереди идущего нода элемента
+        let current = this._head;
+        let count = 1;
+        while (count < index) {
+            prev = current; // считаем предыдущий элемент
+            current = current.next; // считаем нашу позицию
+            count++;
         }
+        let node = new Node(data, current, current.next);
+
+        current.next = node;
         this.length++;
         return this;
     }
@@ -96,32 +85,68 @@ class LinkedList {
         }
         let current;
         if (index == 0) {
-            //current = this.head;
-            this.head = this.head.next; //в конструтор этого класса (в хэд) кладём следующий объект
-            this.head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
-        } else if ((index = this.length - 1)) {
-            this.tail = this.tail.prev;
-            this.tail.next = 0;
+            this._head = this._head.next; //в конструтор этого класса (в хэд) кладём следующий объект
+            this._head.prev = null; //меняем значение прев у экземпляра, который стал хэдом
+        } else if (index == this.length - 1) {
+            this._tail = this._tail.prev;
+            this._tail.next = null;
         } else {
-            current = this.head;
+            current = this._head;
             let prev = null;
             let count = 0;
-
             while (count < index) {
                 prev = current;
                 current = current.next;
                 count++;
             }
-            prev.next = current.next;
+            current.prev.next = current.next;
             current.next.prev = prev;
         }
-        length--;
+
+        this.length--;
         return this;
     }
 
-    reverse() {}
+    reverse() {
+        let current = this._head;
+        //let currentT = this._tail;
+        let index = this.length;
+        //для реверса двусвязного списка достаточно у каждого элемента поменять местами PREV и NEXT
+        while (index > 0) {
+            let elNext = current.next;
+            if (current.next == null) {
+                break;
+            }
+            current.next = current.prev;
+            current.prev = elNext;
+            current = elNext;
+            index--;
+        }
+        let temp = this._tail;
+        this._tail = this._head;
+        this._head = temp;
+        //в голове некст и прев меняем
+        this._head.next = this._head.prev;
+        this._head.prev = null;
+        return this;
+    }
 
-    indexOf(data) {}
+    indexOf(data) {
+        let current = this._head;
+        if (this._head.data == data) {
+            return 0;
+        }
+        let count = 1;
+        while (count < this.length) {
+            if (current.next.data == data) {
+                return count;
+            } else {
+                current = current.next;
+                count++;
+            }
+        }
+        return -1;
+    }
 }
 
 module.exports = LinkedList;
