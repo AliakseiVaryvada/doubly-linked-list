@@ -2,44 +2,44 @@ const Node = require("./node");
 
 class LinkedList {
     constructor() {
-        this.head = new Node();
-        this.tail = new Node();
+        this._head = new Node();
+        this._tail = new Node();
         this.length = 0;
     }
 
     append(data) {
         let node = new Node(data);
         if (this.length == 0) {
-            this.head = node;
-            this.tail = node;
+            this._head = node;
+            this._tail = node;
         } else {
-            this.tail.next = node; // хвостовому элементу в значение next кладём newNode
-            node.prev = this.tail; // текущее значение хвоста даём новому элементу
-            this.tail = node; // делаем новый хвост
+            this._tail.next = node; // хвостовому элементу в значение next кладём newNode
+            node.prev = this._tail; // текущее значение хвоста даём новому элементу
+            this._tail = node; // делаем новый хвост
         }
         this.length++;
         return this;
     }
 
     head() {
-        if (this.head === null) {
+        if (this._head === null) {
             return null;
         }
-        return this.head.data;
+        return this._head.data;
     }
 
     tail() {
-        if (this.tail === null) {
+        if (this._tail === null) {
             return null;
         }
-        return this.tail.data;
+        return this._tail.data;
     }
 
     at(index) {
         if (index < 0 || index >= this.length) {
             return null;
         } else {
-            let current = 0;
+            let current = this.head;
             let count = 0;
             while (count < index) {
                 current = current.next;
@@ -52,12 +52,12 @@ class LinkedList {
     insertAt(index, data) {
         let node = new Node(data);
         if ((index = 0)) {
-            this.tail.next = node; // хвостовому элементу в значение next кладём newNode
-            node.prev = this.tail; // текущее значение хвоста даём новому элементу
+            this._tail.next = node; // хвостовому элементу в значение next кладём newNode
+            node.prev = this._tail; // текущее значение хвоста даём новому элементу
 
-            this.tail = node; // делаем новый хвост
+            this._tail = node; // делаем новый хвост
         } else {
-            let current = this.head;
+            let current = this._head;
             let prev = null;
             let count = 0;
             while (count < index) {
